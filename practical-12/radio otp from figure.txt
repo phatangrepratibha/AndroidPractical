@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <TextView
+        android:id="@+id/t1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Single RadioButton"
+        android:layout_marginTop="20dp"
+        android:layout_centerHorizontal="true"/>
+    <RadioButton
+        android:id="@+id/r1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/t1"
+        android:text="Radio 1"/>
+    <RadioButton
+        android:id="@+id/r2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/r1"
+        android:text="Radio 2"/>
+
+
+   <View android:background="@color/black"
+       android:id="@+id/v1"
+       android:layout_width="wrap_content"
+       android:layout_height="5dp"
+       android:layout_below="@+id/r2"/>
+
+    <TextView
+        android:id="@+id/t2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Single RadioButton"
+        android:layout_below="@+id/r2"
+        android:layout_marginTop="20dp"
+        android:layout_centerHorizontal="true"/>
+
+    <RadioGroup
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/t2">
+
+        <RadioButton
+            android:id="@+id/r3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Male"/>
+
+        <RadioButton
+            android:id="@+id/r4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Female"/>
+
+    </RadioGroup>
+
+    <Button
+        android:id="@+id/b1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+      android:layout_marginTop="300dp"
+        android:text="select"
+        android:onClick="showselect"/>
+
+</RelativeLayout>
+====================================================================================
+package com.example.music;
+
+import androidx.appcompat.app.AppCompatActivity;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.RadioButton;
+import android.widget.Toast;
+
+
+public class MainActivity extends AppCompatActivity {
+
+    RadioButton cb1,cb2,cb3,cb4;
+    Button but;
+
+    protected void onCreate(Bundle savedInstanceState)
+    {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        cb1=findViewById(R.id.r1);
+        cb2=findViewById(R.id.r2);
+        cb3=findViewById(R.id.r3);
+        cb4=findViewById(R.id.r4);
+        but=findViewById(R.id.b1);
+
+
+    }
+
+    public void showselect(View view)
+    {
+        String s="u have selected";
+
+        if(cb1.isChecked())
+        {
+            s+="Radio button 1";
+        }
+
+        if(cb2.isChecked())
+        {
+            s+="Radio button 2";
+        }
+
+        if(cb3.isChecked())
+        {
+            s+="Male";
+        }
+
+        if(cb4.isChecked())
+        {
+            s+="Female";
+        }
+
+        Toast.makeText(getApplicationContext(),s,Toast.LENGTH_SHORT).show();
+    }
+}
+
+

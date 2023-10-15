@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<AbsoluteLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+
+    <TextView
+        android:id="@+id/tf1"
+        android:layout_width="100dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="10dp"
+        android:layout_x="37dp"
+        android:layout_y="64dp"
+        android:text="Enter Name" />
+
+    <TextView
+        android:id="@+id/tf2"
+        android:layout_width="100dp"
+        android:layout_height="50dp"
+        android:layout_x="48dp"
+        android:layout_y="161dp"
+        android:text="Enter Age" />
+
+    <TextView
+        android:id="@+id/tf3"
+        android:layout_width="100dp"
+        android:layout_height="50dp"
+        android:layout_x="52dp"
+        android:layout_y="258dp"
+        android:text="Enter Mobile No" />
+
+
+</AbsoluteLayout>

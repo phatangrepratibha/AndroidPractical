@@ -1,0 +1,120 @@
+==================
+activity_main.xml
+==================
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+    <EditText
+        android:id="@+id/e1"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:hint="ID"/>
+    <EditText
+        android:id="@+id/e2"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/e1"
+        android:hint="name"/>
+    <EditText
+        android:id="@+id/e3"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/e2"
+        android:hint="Mobile No"/>
+    <Button
+        android:id="@+id/b1"
+        android:text="Insert Data"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/e3"
+        android:onClick="insert"/>
+    <EditText
+        android:id="@+id/e4"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:hint="Enter ID"
+        android:layout_below="@+id/b1"/>
+    <Button
+        android:id="@+id/b2"
+        android:text="Retrive Data"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/e4"
+        android:onClick="retrieve"/>
+    <Button
+        android:id="@+id/b3"
+        android:text="Delete Data"
+        android:layout_marginTop="20dp"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/b2"
+        android:onClick="delete"/>
+</RelativeLayout>
+==================
+MainActivity.java
+==================
+package com.example.customer_data;
+
+import androidx.appcompat.app.AppCompatActivity;
+import android.content.Context;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.EditText;
+import android.widget.Toast;
+public class MainActivity extends AppCompatActivity {
+    SQLiteDatabase db;
+    EditText ef1,ef2,ef3,ef4;
+    String sql_query,cid, cname, cmobile,sid,getid;
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        ef1 = (EditText) findViewById(R.id.e1);
+        ef2 = (EditText) findViewById(R.id.e2);
+        ef3 = (EditText) findViewById(R.id.e3);
+        ef4 = (EditText) findViewById(R.id.e4);
+    }
+    public void insert(View view){
+        db= openOrCreateDatabase("sup", Context.MODE_PRIVATE, null);
+        db.execSQL("CREATE TABLE IF NOT EXISTS sim(cid VARCHAR, name VARCHAR, mobile VARCHAR);");
+        cid = ef1.getText().toString();
+        cname = ef2.getText().toString() ;
+        cmobile = ef3.getText().toString();
+        sql_query = "INSERT INTO sim (cid, name, mobile) VALUES('"+cid+"', '"+cname+"', '"+cmobile+"');";
+        db.execSQL(sql_query);
+        Toast.makeText(getApplicationContext(), "Data Inserted Successfully",
+                Toast.LENGTH_LONG).show();
+    }
+    public void retrieve(View view){
+        sid = ef4.getText().toString();
+        Cursor cursor = db.rawQuery( "select * from sim where cid="+sid+"", null );
+        StringBuffer buffer= new StringBuffer();
+        while (cursor.moveToNext()) {
+            String cid =cursor.getString(1);
+            String name =cursor.getString(2);
+            String mob =cursor.getString(3);
+            buffer.append(cid+ " " + name + " " + mob +"\n");
+            Toast.makeText(getApplicationContext(), buffer,
+                    Toast.LENGTH_LONG).show();
+    }
+
+    }
+    public void delete(View view){
+        getid = ef4.getText().toString().trim();
+        sql_query = "DELETE FROM sim  WHERE cid="+getid+"";
+        db.execSQL(sql_query);
+        Toast.makeText(getApplicationContext(), "Data Deleted Successfully", Toast.LENGTH_LONG).show();
+
+        clearFields();
+    }
+    private void clearFields() {
+        ef1.setText("");
+        ef2.setText("");
+        ef3.setText("");
+    }
+}

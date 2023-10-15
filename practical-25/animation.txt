@@ -1,0 +1,221 @@
+XML
+---------->
+
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+     <ImageView
+         android:id="@+id/image"
+         android:layout_width="match_parent"
+         android:layout_height="449dp"
+         android:src="@drawable/t1" />
+
+     <Button
+         android:id="@+id/b1"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:layout_below="@+id/image"
+         android:onClick="clockwise"
+         android:text="clockwise" />
+
+     <Button
+         android:id="@+id/b2"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:layout_below="@+id/image"
+         android:onClick="anti"
+         android:layout_marginStart="120dp"
+         android:text="anti-clockwise" />
+     <Button
+         android:id="@+id/b3"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:layout_below="@+id/b1"
+         android:onClick="zoom"
+         android:text="zoom in" />
+
+     <Button
+         android:id="@+id/b4"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:layout_below="@+id/b2"
+         android:onClick="zoomout"
+         android:layout_marginStart="100dp"
+         android:text="zoom out" />
+
+     <Button
+         android:id="@+id/b5"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:layout_below="@+id/b3"
+         android:onClick="fade"
+         android:text="fade in" />
+
+     <Button
+         android:id="@+id/b6"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:layout_below="@+id/b4"
+         android:onClick="fadeout"
+         android:layout_marginStart="100dp"
+         android:text="fade out" />
+
+</RelativeLayout>
+
+========================================================================================
+
+JAVA
+---------------------------->
+
+package com.example.music;
+
+import androidx.appcompat.app.AppCompatActivity;
+import android.os.Bundle;
+import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.widget.ImageView;
+
+
+public class MainActivity extends AppCompatActivity {
+
+  ImageView iv;
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        iv=findViewById(R.id.image);
+    }
+
+    public void  clockwise(View view)
+    {
+        Animation animation = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.clock);
+        iv.startAnimation(animation);
+    }
+
+    public void  anti(View view)
+    {
+        Animation animation = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.anti);
+        iv.startAnimation(animation);
+    }
+
+    public void  zoom(View view)
+    {
+        Animation animation = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.zoom);
+        iv.startAnimation(animation);
+    }
+
+    public void  zoomout(View view)
+    {
+        Animation animation1 = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.zoomout);
+        iv.startAnimation(animation1);
+    }
+
+    public void  fade(View view)
+    {
+        Animation animation = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.fade);
+        iv.startAnimation(animation);
+    }
+
+    public void  fadeout(View view)
+    {
+        Animation animation1 = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.fadeout);
+        iv.startAnimation(animation1);
+    }
+}
+======================================================================================
+***clock.xml/anticlock.xml***
+--------------------------->
+1]clock
+
+<?xml version="1.0" encoding="utf-8"?>
+<set xmlns:android="http://schemas.android.com/apk/res/android" android:interpolator="@android:anim/cycle_interpolator">
+    <rotate android:fromDegrees="0"
+        android:toDegrees="360"
+        android:pivotX="50%"
+        android:pivotY="50%"
+        android:duration="5000" />
+</set>
+
+
+2]anti-clockwise
+
+<?xml version="1.0" encoding="utf-8"?>
+<set xmlns:android="http://schemas.android.com/apk/res/android" android:interpolator="@android:anim/cycle_interpolator">
+    <rotate android:fromDegrees="360"
+        android:toDegrees="0"
+        android:pivotX="50%"
+        android:pivotY="50%"
+        android:duration="5000" />
+</set>
+=============================================================================================
+
+***zoom.xml/zoomout.xml***
+--------------------------->
+1]zoom
+
+<?xml version="1.0" encoding="utf-8"?>
+<set xmlns:android="http://schemas.android.com/apk/res/android">
+    <scale
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:duration="1000"
+        android:fromXScale="2"
+        android:fromYScale="2"
+        android:pivotX="50%"
+        android:pivotY="50%"
+        android:toXScale="4"
+        android:toYScale="4" >
+    </scale>
+</set>
+
+
+2]zoomout
+
+<?xml version="1.0" encoding="utf-8"?>
+<set xmlns:android="http://schemas.android.com/apk/res/android">
+    <scale
+        android:duration="2500"
+        android:fromXScale="1.0"
+        android:fromYScale="1.0"
+        android:pivotX="50%"
+        android:pivotY="50%"
+        android:toXScale=".2"
+        android:toYScale=".2" />
+</set>
+
+==============================================================================================
+
+
+***fade.xml/fadeout.xml***
+--------------------------->
+1]fade
+
+<?xml version="1.0" encoding="utf-8"?>
+<set xmlns:android="http://schemas.android.com/apk/res/android" android:interpolator="
+@android:anim/linear_interpolator">
+    <alpha
+        android:duration="2000"
+        android:fromAlpha="0.1"
+        android:toAlpha="1.0">
+    </alpha>
+</set>
+
+
+2]fadeout
+
+<?xml version="1.0" encoding="utf-8"?>
+<set xmlns:android="http://schemas.android.com/apk/res/android"
+    android:interpolator="@android:anim/linear_interpolator">
+    <alpha
+        android:duration="2000"
+        android:fromAlpha="1.0"
+        android:toAlpha="0.1" >
+    </alpha>
+</set>
+
+==============================================================================================
+

@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <DatePicker
+        android:id="@+id/d1"
+        android:layout_width="match_parent"
+        android:layout_height="320dp"
+        android:datePickerMode="calendar"/>
+
+<Button
+    android:id="@+id/b1"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="set date"
+    android:layout_below="@+id/d1"
+    />
+
+    <TextView
+        android:id="@+id/t1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/b1" />
+
+
+    <TimePicker
+        android:id="@+id/tp"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_below="@+id/t1"
+        android:timePickerMode="spinner"/>
+
+    <Button
+        android:id="@+id/b2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="set time"
+        android:layout_below="@+id/tp"
+        />
+
+    <TextView
+        android:id="@+id/t2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/b2" />
+
+</RelativeLayout>
+
+
+java
+==========
+package com.example.data__time;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.DatePicker;
+import android.widget.TextView;
+import android.widget.TimePicker;
+
+public class MainActivity extends AppCompatActivity {
+    private TextView tf1,tf2;
+    private Button but1,but2;
+    private DatePicker dp;
+    private TimePicker time;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        tf1=findViewById(R.id.t1);
+        tf2=findViewById(R.id.t2);
+        but1=findViewById(R.id.b1);
+        but2=findViewById(R.id.b2);
+        dp=findViewById(R.id.d1);
+        time=findViewById(R.id.tp);
+
+        but1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                tf1.setText("date is:"+dp.getDayOfMonth()+"-"+dp.getMonth());
+            }
+        });
+
+        but2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                tf2.setText("time is:"+time.getCurrentHour()+"-"+time.getCurrentMinute());
+            }
+        });
+    }
+}

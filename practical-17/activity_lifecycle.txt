@@ -1,0 +1,33 @@
+package com.example.data__time;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.os.Bundle;
+import android.widget.Toast;
+
+public class MainActivity extends AppCompatActivity {
+
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        Toast.makeText(getApplicationContext(),"activity created",Toast.LENGTH_SHORT).show();
+
+    }
+
+    @Override
+    protected void onStart()
+    {
+        super.onStart();
+        Toast.makeText(getApplicationContext(),"activity started",Toast.LENGTH_SHORT).show();
+
+    }
+
+    @Override
+    protected void onStop()
+    {
+        super.onStop();
+        Toast.makeText(getApplicationContext(),"activity stoped",Toast.LENGTH_SHORT).show();
+    }
+}

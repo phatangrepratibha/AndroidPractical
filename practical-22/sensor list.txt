@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+
+    <TextView
+        android:id="@+id/tv1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:text="Sensors list"
+       />
+</RelativeLayout>
+==============================================================================================
+package com.example.music;
+
+import androidx.appcompat.app.AppCompatActivity;
+import android.content.Context;
+import android.hardware.Sensor;
+import android.hardware.SensorManager;
+import android.os.Bundle;
+import android.widget.TextView;
+import java.util.List;
+public class MainActivity extends AppCompatActivity {
+    SensorManager mgr;
+    TextView text;
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        mgr=(SensorManager) getSystemService(Context.SENSOR_SERVICE);
+        text=(TextView) findViewById(R.id.tv1);
+        List<Sensor> str =mgr.getSensorList(Sensor.TYPE_ALL);
+        StringBuilder buff=new StringBuilder();
+        for(Sensor s:str)
+        {
+            buff.append(s.getName()+"\n");
+        }
+        text.setText(buff);
+    }
+}

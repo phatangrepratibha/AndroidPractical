@@ -1,0 +1,80 @@
+activity_main
+=============================================================
+
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+
+     <EditText
+         android:id="@+id/e1"
+         android:layout_width="match_parent"
+         android:layout_height="wrap_content"
+         android:hint="Enter text"
+         android:layout_marginTop="10dp"/>
+
+
+     <Button
+         android:id="@+id/b1"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:text="specch"
+         android:onclick="click"
+         android:layout_marginTop="100dp"
+         android:layout_centerHorizontal="true"/>
+
+
+</RelativeLayout>
+
+
+=================================================================
+mainactivity.java 
+=================================================================
+
+package com.example.music;
+
+import static android.speech.tts.TextToSpeech.QUEUE_ADD;
+import androidx.appcompat.app.AppCompatActivity;
+import android.os.Bundle;
+import android.speech.tts.TextToSpeech;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import java.util.Locale;
+
+
+public class MainActivity extends AppCompatActivity
+{
+    TextToSpeech tls;
+    EditText ef1, ef2;
+    Button but;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState)
+    {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        ef1 = findViewById(R.id.e1);
+        but = findViewById(R.id.b1);
+
+    }
+              public void click(View view)
+              {
+                tls = new TextToSpeech(getApplicationContext(), new TextToSpeech.OnInitListener()
+                {
+                    public void onInit(int i)
+                    {
+                        if (i == TextToSpeech.SUCCESS)
+                        {
+                            tls.setLanguage(Locale.ENGLISH);
+                            tls.setSpeechRate(0.1f);
+                            tls.speak(ef1.getText().toString(), QUEUE_ADD, null);
+                        }
+                    }
+                });
+            }
+}

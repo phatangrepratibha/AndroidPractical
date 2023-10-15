@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <TextView android:id="@+id/tv1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Showing AutoCompleteTextView "
+        android:layout_marginTop="50dp"
+        android:textSize="20sp"/>
+
+    <AutoCompleteTextView android:id="@+id/at"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:textSize="20sp"
+        android:hint="Enter here"
+        android:layout_below="@id/tv1"
+        android:layout_marginTop="30dp"/>
+</RelativeLayout>
+
+===============================================
+
+package com.example.data__time;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+
+import android.os.Bundle;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
+
+public class MainActivity extends AppCompatActivity {
+
+    AutoCompleteTextView auto;
+    String search[] = {"simran","supriya"};
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        auto = findViewById(R.id.at);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1,  search);
+        auto.setThreshold(1);
+        auto.setAdapter(adapter);
+    }
+}
+
+

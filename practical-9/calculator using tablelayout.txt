@@ -1,0 +1,116 @@
+
+<?xml version="1.0" encoding="utf-8"?>
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+   <TableRow
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:layout_marginTop="20dp">
+
+    <EditText
+        android:id="@+id/t1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="enter first no"/>
+   </TableRow>
+    
+
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp">
+
+        <EditText
+            android:id="@+id/t2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="enter second no"/>
+    </TableRow>
+
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp">
+
+        <Button
+            android:id="@+id/b1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:text="add"/>
+
+        <Button
+            android:id="@+id/b2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="sub"/>
+    </TableRow>
+
+
+</TableLayout>
+=====================================================
+
+package com.example.sample;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+
+import android.os.Bundle;
+import android.view.View;
+import android.widget.EditText;
+import android.widget.Button;
+import android.widget.Toast;
+
+public class MainActivity extends AppCompatActivity {
+    private EditText num1;
+    private EditText num2;
+    private Button add,sub;
+
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        num1=(EditText) findViewById(R.id.t1);
+        num2=(EditText) findViewById(R.id.t2);
+        add= (Button) findViewById(R.id.b1);
+        sub=findViewById(R.id.b2);
+
+
+        add.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                int a=Integer.parseInt(num1.getText().toString());
+                int b=Integer.parseInt(num2.getText().toString());
+                int c=a+b;
+
+                Toast.makeText(getApplicationContext(),String.valueOf(c),Toast.LENGTH_LONG).show();
+
+            }
+
+        });
+
+        sub.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                int a=Integer.parseInt(num1.getText().toString());
+                int b=Integer.parseInt(num2.getText().toString());
+                int c=a-b;
+
+                Toast.makeText(getApplicationContext(),String.valueOf(c),Toast.LENGTH_LONG).show();
+
+            }
+
+        });
+    }
+}
+
+
+
+

@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity" >
+
+    <ToggleButton
+        android:id="@+id/tb"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:layout_centerInParent="true"
+        android:textOff="OFF"
+        android:textOn="ON" />
+
+
+</RelativeLayout>
+
+==============================================
+
+package com.example.data__time;
+import androidx.appcompat.app.AppCompatActivity;
+
+
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Toast;
+import android.widget.ToggleButton;
+
+
+public class MainActivity extends AppCompatActivity {
+    private ToggleButton tog;
+
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        tog = findViewById(R.id.tb);
+
+        tog.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (tog.isChecked()) {
+                    Toast.makeText(getApplicationContext(), "bluetooth is on", Toast.LENGTH_LONG).show();
+                } else {
+                    Toast.makeText(getApplicationContext(), "bluetooth is off", Toast.LENGTH_LONG).show();
+                }
+            }
+        });
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+

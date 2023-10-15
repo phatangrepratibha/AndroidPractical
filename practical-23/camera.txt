@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <TextView
+        android:id="@+id/tv1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Android Camera Program"
+        android:textSize="20dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginLeft="80dp"/>
+    <ImageView
+        android:id="@+id/iv1"
+        android:layout_width="380dp"
+        android:layout_height="300dp"
+        android:layout_below="@id/tv1"
+        android:layout_marginTop="50dp"
+        android:layout_marginLeft="20dp"
+        android:src="@drawable/image"/>
+    <Button
+        android:id="@+id/b1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/iv1"
+        android:layout_marginTop="50dp"
+        android:layout_centerHorizontal="true"
+        android:text="Take Photo"/>
+</RelativeLayout>
+
+
+
+**************mainactivity java file**********************
+
+package com.example.camera;
+
+import androidx.appcompat.app.AppCompatActivity;
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.os.Bundle;
+import android.provider.MediaStore;
+import android.view.View;
+import android.widget.Button;
+import android.widget.ImageView;
+
+public class MainActivity extends AppCompatActivity {
+
+    Button b;
+    ImageView iv;
+    int CAMERA_REQUEST=1;
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        b=findViewById(R.id.b1);
+        iv=findViewById(R.id.iv1);
+        b.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent obj=new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                startActivityForResult(obj,CAMERA_REQUEST);
+            }
+        });
+    }
+    protected void onActivityResult(int requestcode,int resultcode,Intent data) {
+        super.onActivityResult(requestcode, resultcode, data);
+        if(requestcode==CAMERA_REQUEST)
+        {
+            Bitmap img=(Bitmap) data.getExtras().get("data");
+            iv.setImageBitmap(img);
+        }
+    }
+}
+
+
+
+****************manifest file******************************
+
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+    <uses-permission android:name="android.permission.CAMERA"
+        android:required="true"
+        android:requiredFeature="true"/>
+
+    <application
+        android:allowBackup="true"
+        android:dataExtractionRules="@xml/data_extraction_rules"
+        android:fullBackupContent="@xml/backup_rules"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.Camera"
+        tools:targetApi="31">
+        <activity
+            android:name=".MainActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+    </application>
+
+</manifest>

@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+     
+     <EditText
+         android:id="@+id/e1"
+         android:layout_width="match_parent"
+         android:layout_height="wrap_content"
+         android:layout_marginTop="10dp"
+         android:hint="Enter UserName"/>
+
+
+     <Button
+         android:id="@+id/b1"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:text="Login"
+         android:layout_marginTop="100dp"
+         android:layout_centerHorizontal="true"/>
+
+     <TextView
+         android:id="@+id/t1"
+         android:layout_width="100dp"
+         android:layout_height="50dp"
+         android:layout_marginTop="200dp"
+         android:layout_centerHorizontal="true"/>
+</RelativeLayout>
+==========================================================================================
+
+package com.example.music;
+import androidx.appcompat.app.AppCompatActivity;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
+
+public class MainActivity extends AppCompatActivity
+{
+    TextView tf1;
+    EditText ef1;
+    Button but;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState)
+    {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        tf1=findViewById(R.id.t1);
+        ef1=findViewById(R.id.e1);
+        but=findViewById(R.id.b1);
+
+        but.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View view) {
+                String uname=ef1.getText().toString();
+                if(uname.equals("sim"))
+                {
+                    tf1.setText("login success!!!");
+                }
+                else
+                {
+                    Toast.makeText(getApplicationContext(), "Login not success", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+    }
+}
+
+

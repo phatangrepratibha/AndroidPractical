@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".MainActivity">
+
+   <RadioGroup
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:orientation="horizontal">
+
+       <RadioButton
+           android:id="@+id/c1"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:text="Red"/>
+
+       <RadioButton
+           android:id="@+id/c2"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:text="Black"
+           android:layout_marginLeft="20dp"/>
+   </RadioGroup>
+
+
+    <Button
+        android:id="@+id/b1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="100dp"
+        android:text="select"
+        android:onClick="showselect"/>
+
+
+
+
+
+</RelativeLayout>
+
+
+package com.example.music;
+
+import androidx.appcompat.app.AppCompatActivity;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.RadioButton;
+import android.widget.Toast;
+
+
+public class MainActivity extends AppCompatActivity {
+
+RadioButton cb1,cb2;
+Button but;
+
+    protected void onCreate(Bundle savedInstanceState)
+    {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        cb1=findViewById(R.id.c1);
+        cb2=findViewById(R.id.c2);
+        but=findViewById(R.id.b1);
+
+
+    }
+
+    public void showselect(View view)
+    {
+        String s="u have selected";
+
+        if(cb1.isChecked())
+        {
+            s+="Red";
+        }
+
+        if(cb2.isChecked())
+        {
+            s+="Blue";
+        }
+
+        Toast.makeText(getApplicationContext(),s,Toast.LENGTH_SHORT).show();
+    }
+}

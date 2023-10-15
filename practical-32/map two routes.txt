@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <EditText
+        android:id="@+id/e1"
+        android:layout_width="317dp"
+        android:layout_height="56dp"
+        android:layout_marginTop="50dp"
+        android:hint="Enter Source Location"
+        />
+    <EditText
+        android:id="@+id/e2"
+        android:layout_width="317dp"
+        android:layout_height="52dp"
+        android:layout_marginTop="150dp"
+        android:hint="Enter Destination Location" />
+    <Button
+        android:id="@+id/b1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="250dp"
+        android:layout_centerHorizontal="true"
+        android:text="Display Location" />
+
+</RelativeLayout>
+==============================================================================================
+
+package com.example.music;
+
+import androidx.appcompat.app.AppCompatActivity;
+import android.content.ActivityNotFoundException;
+import android.content.Intent;
+import android.net.Uri;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
+public class MainActivity extends AppCompatActivity {
+    EditText src, dest;
+    Button btn;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        src = findViewById(R.id.e1);
+        dest = findViewById(R.id.e2);
+        btn = findViewById(R.id.b1);
+        btn.setOnClickListener(new View.OnClickListener() 
+        {
+            @Override
+            public void onClick(View v) {
+                String sSource = src.getText().toString().trim();
+                String sDestination = dest.getText().toString().trim();
+                if (sSource.equals("") && sDestination.equals("")) {
+                    Toast.makeText(MainActivity.this, "Enter both location",
+                            Toast.LENGTH_SHORT).show();
+                } else {
+                    DisplayTrack(sSource, sDestination);
+                }
+            }
+        });
+    }
+
+    private void DisplayTrack(String sSource, String sDestination) 
+    {
+        try {
+            Uri uri = Uri.parse("https://www.google.co.in/maps/dir/" + sSource + "/" + sDestination);
+            Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+            intent.setPackage("com.google.android.apps.maps");
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent);
+        } catch (ActivityNotFoundException e) 
+        {
+            Uri uri = Uri.parse("https://play.google.com/store/apps/details?id=com.google.android.apps.maps");
+            Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent);
+        }
+    }
+}

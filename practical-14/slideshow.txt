@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    tools:context=".MainActivity" >
+    <ImageView
+        android:layout_width="300dp"
+        android:layout_height="500dp"
+        android:layout_centerHorizontal="true"
+        android:src="@drawable/bg"
+        android:id="@+id/img"/>
+    <Button
+        android:id="@+id/b1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/img"
+        android:layout_centerHorizontal="true"
+        android:text="Change Image"/>
+</RelativeLayout>
+
+
+==========================================================
+package com.example.music;
+
+import androidx.appcompat.app.AppCompatActivity;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.ImageView;
+
+public class MainActivity extends AppCompatActivity {
+    Button btn;
+    ImageView iv;
+    int img[]={R.drawable.t1,R.drawable.sim,R.drawable.bg};
+    int i=0;
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        iv=(ImageView) findViewById(R.id.img);
+        btn=(Button) findViewById(R.id.b1);
+        Boolean Flag =true;
+
+        btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                iv.setImageResource(img[i]);
+                i++;
+                if(i==3)
+                    i=0;
+            }
+        });
+    }
+}
+
+
+
+
